@@ -32,9 +32,10 @@ def main():
                 st.session_state.conv = chatbot.conv  # Store the conversation state
             except Exception as e:
                 st.error(f"Error: {e}")
-
-            # Clean up the temporary file
-            os.remove(temp_file)
+            finally:
+                # Clean up the temporary file
+                if os.path.exists(temp_file):
+                    os.remove(temp_file)
 
         # Section to continue the chat
         if 'conv' in st.session_state:
